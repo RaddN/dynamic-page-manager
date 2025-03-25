@@ -1,0 +1,368 @@
+/**
+ * Admin Styles for Page Management Plugin
+ * Styles for both table and tree layouts
+ */
+
+/* Layout Switcher */
+.dynapama-header-actions {
+    margin: 10px 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.dynapama-layout-switcher {
+    margin-bottom: 15px;
+}
+
+.dynapama-layout-switcher label {
+    margin-right: 10px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.dynapama-layout-switcher input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* Tree Layout Styles */
+.dynapama-tree-layout {
+    margin-top: 20px;
+}
+
+.dynapama-tree-container {
+    padding: 10px;
+}
+
+.dynapama-tree-item {
+    margin-bottom: 10px;
+}
+
+.dynapama-tree-node {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+}
+
+.dynapama-tree-node.has-children {
+    background-color: #f0f7fd;
+}
+
+.dynapama-node-toggle {
+    display: inline-flex;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.dynapama-node-title {
+    font-weight: bold;
+    flex-grow: 1;
+}
+
+.dynapama-node-actions {
+    margin-left: auto;
+}
+
+.dynapama-tree-children {
+    margin-left: 20px;
+    padding-top: 10px;
+}
+
+.dynapama-tree-category {
+    margin-bottom: 15px;
+    padding-left: 10px;
+    border-left: 1px solid #ddd;
+}
+
+.dynapama-tree-category h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+.dynapama-tree-actions {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.dynapama-no-pages {
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    text-align: center;
+}
+
+/* Collapsed state */
+.dynapama-tree-node.collapsed + .dynapama-tree-children {
+    display: none;
+}
+
+/**
+ * Styles for the table layout view
+ */
+
+
+
+
+/* Indentation for nested levels */
+.dynapama-table-layout [style*="margin-left"] {
+    position: relative;
+}
+
+.dynapama-table-layout [style*="margin-left"]::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0;
+    height: 100%;
+    border-left: 1px dashed #dcdcde;
+}
+.dynapama-table-layout [style*="margin-left"]>:nth-child(2){
+    margin-left: 25px;
+}
+.dynapama-table-layout [style*="margin-left"]>h3::before{
+    content: ".....";
+    color: #dcdcde;
+    margin-right: 5px;
+    font-size: 0.9rem;
+    margin-top: -10px;
+}
+
+/* Responsive adjustments for smaller screens */
+@media screen and (max-width: 782px) {
+    .dynapama-table-layout th, 
+    .dynapama-table-layout td {
+        padding: 8px 10px;
+    }
+    
+    .dynapama-table-layout h3 {
+        display: block;
+        margin-bottom: 12px;
+    }
+    
+    .nav-tab {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+}
+
+/* modal style */
+
+/* Modal styles */
+.dynapama-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.dynapama-modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close-modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+#select_page_to_import {
+    width: 100%;
+    padding: 8px;
+    margin: 15px 0;
+}
+
+#import_selected_page_btn {
+    margin-top: 15px;
+}
+
+#import_loading {
+    margin: 15px 0;
+    text-align: center;
+}
+
+/* Content selection styles */
+.dynamic-field-container {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.content-select-btn {
+    margin-left: 10px;
+}
+
+.content-preview {
+    position: absolute;
+    right: 0;
+    width: 300px;
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.content-options h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+.content-option {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content-option:last-child {
+    border-bottom: none;
+}
+
+.content-preview-text {
+    flex: 1;
+    font-size: 12px;
+    margin-right: 10px;
+}
+
+.select-content {
+    padding: 2px 8px !important;
+    font-size: 12px !important;
+    min-height: auto !important;
+}
+
+
+/* create page form style */
+/* Base styles for the form */
+.old_content {
+    height: 500px;
+    margin: 20px;
+    overflow: scroll;
+}
+
+#rcreate_page {
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) !important;
+    justify-content: space-between;
+    column-gap: 100px;
+}
+
+/* Form headings */
+#rcreate_page h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    grid-column: span 2;
+}
+
+#rcreate_page h3 {
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+/* Input fields */
+#rcreate_page input[type="text"],
+#rcreate_page input[type="url"],
+#rcreate_page input[type="hidden"],
+#rcreate_page input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Labels */
+#rcreate_page label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
+    color: #666;
+}
+
+/* Buttons */
+#rcreate_page button {
+    background-color: #007cba;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-right: 20px;
+}
+
+#rcreate_page button:hover {
+    background-color: #005a8c;
+}
+
+#rcreate_page textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    /* Ensures padding is included in width */
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    #rcreate_page {
+        padding: 15px;
+    }
+
+    #rcreate_page h2 {
+        font-size: 22px;
+    }
+
+    #rcreate_page h3 {
+        font-size: 18px;
+    }
+
+    #rcreate_page input[type="text"],
+    #rcreate_page input[type="url"] {
+        font-size: 14px;
+    }
+
+    #rcreate_page button {
+        width: 100%;
+        padding: 12px;
+    }
+}

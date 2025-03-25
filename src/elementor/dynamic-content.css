@@ -1,0 +1,42 @@
+/* Common widget styles */
+.dynapama-dynamic-content-widget,
+.dynapama-dynamic-loop-widget,
+.dynapama-dynamic-loop-content-widget {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0;
+    margin-bottom: 12px;
+    background-color: #fff;
+}
+
+/* Header styles */
+.dynapama-block-header {
+    padding: 10px 15px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+/* Content styles */
+.dynapama-widget-content {
+    padding: 15px;
+    font-family: monospace;
+    word-break: break-all;
+}
+
+/* Specific header styles */
+.dynapama-dynamic-header {
+    background-color: #e8f6fd;
+    color: #0073aa;
+}
+
+.dynapama-loop-header {
+    background-color: #f9f1e8;
+    color: #aa7700;
+}
+
+.dynapama-content-header {
+    background-color: #e8f6fd;
+    color: #0073aa;
+}

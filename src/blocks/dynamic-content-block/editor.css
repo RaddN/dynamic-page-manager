@@ -1,0 +1,43 @@
+/**
+ * Editor styles for custom blocks
+ */
+
+ .dynapama-dynamic-content-block,
+ .dynapama-dynamic-loop-block,
+ .dynapama-loop-content-block {
+     border: 1px solid #ccc;
+     border-radius: 4px;
+     padding: 0;
+     margin-bottom: 12px;
+     background-color: #fff;
+ }
+ 
+ .dynapama-block-header {
+     background-color: #f1f1f1;
+     padding: 10px 15px;
+     font-weight: bold;
+     border-bottom: 1px solid #ccc;
+     border-top-left-radius: 3px;
+     border-top-right-radius: 3px;
+ }
+ 
+ .dynapama-block-content {
+     padding: 15px;
+     font-family: monospace;
+     word-break: break-all;
+ }
+ 
+ .dynapama-dynamic-content-block .dynapama-block-header {
+     background-color: #e8f6fd;
+     color: #0073aa;
+ }
+ 
+ .dynapama-dynamic-loop-block .dynapama-block-header {
+     background-color: #f9f1e8;
+     color: #aa7700;
+ }
+ 
+ .dynapama-loop-content-block .dynapama-block-header {
+     background-color: #e8fde8;
+     color: #00aa30;
+ }
