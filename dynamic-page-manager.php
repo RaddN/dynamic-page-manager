@@ -83,7 +83,6 @@ function dynapama_template_update_handler($post_id, $post_after, $post_before) {
     
     // Check if the content has changed
     $content_changed = $post_after->post_content !== $post_before->post_content;
-    $title_changed = $post_after->post_title !== $post_before->post_title;
     
     // Find all pages that use this template
     $dependent_pages = dynapama_get_dependent_pages($post_id);
@@ -107,7 +106,11 @@ function dynapama_template_update_handler($post_id, $post_after, $post_before) {
     }
 }
 add_action('post_updated', 'dynapama_template_update_handler', 10, 3);
-
+add_action('save_post', function($post_id) {
+    $post_after = get_post($post_id);
+    $post_before = get_post($post_id, ARRAY_A); // Fetch the post before changes
+    dynapama_template_update_handler($post_id, $post_after, (object) $post_before);
+}, 20, 1);
 /**
  * Update a page that depends on the template - content only
  */

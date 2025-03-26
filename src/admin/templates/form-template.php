@@ -298,7 +298,7 @@ function store_post_meta($post_id)
  * @param int $page_id The page ID
  * @return array Array of parent slugs
  */
-function get_post_dynamic_meta($post_id)
+function dynapama_get_post_dynamic_meta($post_id)
 {
     return dynapama_get_dynamic_meta($post_id);
 }
@@ -353,7 +353,7 @@ if (!isset($_POST['dynapama_nonce']) && !wp_verify_nonce(sanitize_text_field(wp_
 
     $loop_count = isset($_POST['loop_count']) ? intval($_POST['loop_count']) : 1;
 
-    $meta_data = isset($_POST['page_id']) ? get_post_dynamic_meta(sanitize_text_field(wp_unslash($_POST['page_id']))) : [];
+    $meta_data = isset($_POST['page_id']) ? dynapama_get_post_dynamic_meta(sanitize_text_field(wp_unslash($_POST['page_id']))) : [];
     $htmlOnly = '';
     if (empty($meta_data)) {
         $imported_page_id = isset($_POST['page_id']) ? sanitize_text_field(wp_unslash($_POST['page_id'])) : 0;
