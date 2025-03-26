@@ -228,7 +228,7 @@ function dynapama_update_dependent_page_meta($page_id, $template_meta) {
     }
     
     // Trigger action to allow additional customizations
-    do_action('rdynamic_after_meta_update', $page_id, $template_meta);
+    do_action('dynapama_after_meta_update', $page_id, $template_meta);
 }
 
 /**
