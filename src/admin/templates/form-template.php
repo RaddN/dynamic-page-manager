@@ -11,25 +11,25 @@ if (!defined('ABSPATH')) {
 
 if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     // Handle form submissions
-    DYNAPAMA_handle_form_submission();
+    dynapama_handle_form_submission();
 }
 
-function DYNAPAMA_handle_form_submission()
+function dynapama_handle_form_submission()
 {
     if (isset($_POST['dynapama_nonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['dynapama_nonce'])), 'dynapama_import_action') && isset($_POST['import_template'])) {
-        import_template();
+        dynapama_import_template();
     } elseif (isset($_POST['dynapama_create_page_nonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['dynapama_create_page_nonce'])), 'dynapama_create_page_action') && isset($_POST['create_page'])) {
-        create_page();
+        dynapama_create_page();
     } elseif (isset($_POST['dynapama_create_page_nonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['dynapama_create_page_nonce'])), 'dynapama_create_page_action') && isset($_POST['update_page'])) {
-        update_page();
+        dynapama_update_page();
     } elseif (isset($_POST['dynapama_delete_nonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['dynapama_delete_nonce'])), 'dynapama_delete_action') && isset($_POST['delete_page'])) {
-        delete_page();
+        dynapama_delete_page();
     } elseif (isset($_POST['dynapama_duplicate_nonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['dynapama_duplicate_nonce'])), 'dynapama_duplicate_action') && isset($_POST['duplicate_page'])) {
-        duplicate_page();
+        dynapama_duplicate_page();
     }
 }
 
-function import_template()
+function dynapama_import_template()
 {
     if (isset($_POST['dynapama_nonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['dynapama_nonce'])), 'dynapama_import_action')) {
         $template_id = intval($_POST['existing_page'] ?? '');
@@ -38,16 +38,16 @@ function import_template()
     }
 }
 
-function create_page()
+function dynapama_create_page()
 {
     if (isset($_POST['dynapama_create_page_nonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['dynapama_create_page_nonce'])), 'dynapama_create_page_action')) {
         $parent_slug = sanitize_text_field(wp_unslash($_POST['parent_slug'] ?? ''));
         $page_name = sanitize_text_field(wp_unslash($_POST['page_name'] ?? ''));
         $page_slug = sanitize_text_field(wp_unslash($_POST['page_slug'] ?? ''));
-        $template_content = fetch_template_content();
+        $template_content = dynapama_fetch_template_content();
 
         // Replace dynamic content placeholders
-        $template_content = replace_dynamic_content($template_content);
+        $template_content = dynapama_replace_dynamic_content($template_content);
 
         // Get parent page ID if parent slug exists
         $parent_id = 0;
@@ -69,13 +69,13 @@ function create_page()
         ));
 
         // Store form data in post meta
-        store_post_meta($new_page_id);
+        dynapama_store_post_meta($new_page_id);
 
-        add_action('init', 'dynamicpm_redirect_function');
+        add_action('init', 'dynapama_redirect_function');
     }
 }
 
-function update_page()
+function dynapama_update_page()
 {
     if (isset($_POST['dynapama_create_page_nonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['dynapama_create_page_nonce'])), 'dynapama_create_page_action')) {
 
@@ -83,10 +83,10 @@ function update_page()
         $parent_slug = sanitize_text_field(wp_unslash($_POST['parent_slug'] ?? ''));
         $page_name = sanitize_text_field(wp_unslash($_POST['page_name'] ?? ''));
         $page_slug = sanitize_text_field(wp_unslash($_POST['page_slug'] ?? ''));
-        $template_content = fetch_template_content();
+        $template_content = dynapama_fetch_template_content();
 
         // Replace dynamic content placeholders
-        $template_content = replace_dynamic_content($template_content);
+        $template_content = dynapama_replace_dynamic_content($template_content);
 
         // Get parent page ID if parent slug exists
         $parent_id = 0;
@@ -107,13 +107,13 @@ function update_page()
         ));
 
         // Update form data in post meta
-        store_post_meta($page_id);
+        dynapama_store_post_meta($page_id);
 
-        add_action('init', 'dynamicpm_redirect_function');
+        add_action('init', 'dynapama_redirect_function');
     }
 }
 
-function delete_page()
+function dynapama_delete_page()
 {
     if (isset($_POST['dynapama_delete_nonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['dynapama_delete_nonce'])), 'dynapama_delete_action')) {
 
@@ -129,11 +129,11 @@ function delete_page()
         }
 
         wp_delete_post($page_id, true);
-        add_action('init', 'dynamicpm_redirect_function');
+        add_action('init', 'dynapama_redirect_function');
     }
 }
 
-function duplicate_page()
+function dynapama_duplicate_page()
 {
     if (isset($_POST['dynapama_duplicate_nonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['dynapama_duplicate_nonce'])), 'dynapama_duplicate_action')) {
 
@@ -160,12 +160,12 @@ function duplicate_page()
                     add_post_meta($new_page_id, $key, maybe_unserialize($value));
                 }
             }
-            add_action('init', 'dynamicpm_redirect_function');
+            add_action('init', 'dynapama_redirect_function');
         }
     }
 }
 
-function dynamicpm_redirect_function()
+function dynapama_redirect_function()
 {
     // Check your conditions
     wp_safe_redirect(esc_url(admin_url('admin.php?page=page-management')));
@@ -173,7 +173,7 @@ function dynamicpm_redirect_function()
 }
 
 
-function fetch_template_content()
+function dynapama_fetch_template_content()
 {
     if (isset($_POST['dynapama_create_page_nonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['dynapama_create_page_nonce'])), 'dynapama_create_page_action')) {
 
@@ -183,7 +183,7 @@ function fetch_template_content()
     }
 }
 
-function replace_dynamic_content($template_content)
+function dynapama_replace_dynamic_content($template_content)
 {
     if (isset($_POST['dynapama_create_page_nonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['dynapama_create_page_nonce'])), 'dynapama_create_page_action')) {
 
@@ -253,7 +253,7 @@ function replace_dynamic_content($template_content)
     }
 }
 
-function store_post_meta($post_id)
+function dynapama_store_post_meta($post_id)
 {
     if (isset($_POST['dynapama_create_page_nonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['dynapama_create_page_nonce'])), 'dynapama_create_page_action')) {
 
@@ -359,7 +359,7 @@ if (!isset($_POST['dynapama_nonce']) && !wp_verify_nonce(sanitize_text_field(wp_
         $imported_page_id = isset($_POST['page_id']) ? sanitize_text_field(wp_unslash($_POST['page_id'])) : 0;
         $imported_page = get_post($imported_page_id) ?? "";
         $imported_page_content = $imported_page->post_content ?? "";
-        $htmlOnly = '<div class="old_content"><code style="white-space: pre-wrap;">' . extractOnlyHtmlTags($imported_page_content) . '</code></div>';
+        $htmlOnly = '<div class="old_content"><code style="white-space: pre-wrap;">' . dynapama_extractOnlyHtmlTags($imported_page_content) . '</code></div>';
     }
     ?>
     <form method="post" action="" id="rcreate_page">
@@ -523,7 +523,7 @@ if (!isset($_POST['dynapama_nonce']) && !wp_verify_nonce(sanitize_text_field(wp_
     <?php endif;
 
 
-function extractOnlyHtmlTags($content)
+function dynapama_extractOnlyHtmlTags($content)
 {
     // Remove WordPress comments/block markers
     $content = preg_replace('/<!--\s*wp:.*?-->/', '', $content);

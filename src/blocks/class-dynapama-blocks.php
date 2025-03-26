@@ -20,7 +20,7 @@ function dynapama_register_dynamic_ajax_filter_block()
 
     register_block_type('dynapama/dynamic-content', array(
         'editor_script' => 'dynamic-page-manager',
-        'render_callback' => 'dynamic_content_management_func',
+        'render_callback' => 'dynapama_dynamic_content_management_func',
         'attributes' => array(
             'type' => array(
                 'type' => 'string',
@@ -39,7 +39,7 @@ function dynapama_register_dynamic_ajax_filter_block()
 
     register_block_type('dynapama/loop-content', array(
         'editor_script' => 'dynamic-loop-content-management',
-        'render_callback' => 'dynamic__loop_content_management_func',
+        'render_callback' => 'dynapama_dynamic__loop_content_management_func',
         'attributes' => array(
             'type' => array(
                 'type' => 'string',
@@ -58,12 +58,12 @@ function dynapama_register_dynamic_ajax_filter_block()
 }
 add_action('init', 'dynapama_register_dynamic_ajax_filter_block');
 
-function dynamic_content_management_func($attributes)
+function dynapama_dynamic_content_management_func($attributes)
 {
     return $attributes["output"]??'';
 }
 
-function dynamic__loop_content_management_func($attributes)
+function dynapama_dynamic__loop_content_management_func($attributes)
 {
     return $attributes["output"];
 }
